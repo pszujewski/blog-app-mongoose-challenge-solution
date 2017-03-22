@@ -55,6 +55,41 @@ describe('Blog API Resource', function(){
         }); //it
     }); // get describe
 
+    describe('POST Endpoint', function() {
+     it('should add a new blog post', function() {
+        const newPost = {
+           title: "Fake post title, bitch",
+           author: {
+               firstName: "J.K",
+               lastName: "Rowling"
+           },
+           content: "Imma be a fake post",
+           created: Date.now()  
+        };
+        return chai.request(app)
+        .post('/posts')
+        .send(newPost)
+        .then(function(res) {
+            res.should.have.status(201);
+            res.should.be.json;
+            res.body.should.be.a('object');
+            res.body.should.include.keys(
+                "title", "author", "content", "created");
+            res.body.title.should.equal(newPost.title);
+            res.body.author.should.equal(newPost.author.firstName+ " "+newPost.author.lastName);
+            res.body.content.should.equal(newPost.content);
+            console.log(res.body.id);
+            return BlogPost.findById(res.body.id);
+        })
+        .then(function(foundPost) {
+            foundPost.title.should.equal(newPost.title);
+            foundPost.author.firstName.should.equal(newPost.author.firstName);
+            foundPost.author.lastName.should.equal(newPost.author.lastName);
+            foundPost.content.should.equal(newPost.content);
+        });
+     });
+    });
+
 }); //outer describe
 
 
