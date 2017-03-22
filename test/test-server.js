@@ -88,7 +88,55 @@ describe('Blog API Resource', function(){
             foundPost.content.should.equal(newPost.content);
         });
      });
+    }); //ends describe for post endpoint
+
+    describe('PUT endpoint', function(){
+        it('should update fields you send over', function(){
+        const updateData = {
+            title: 'I updated the title',
+            content: 'I updated the content with this'
+        };
+
+        return BlogPost
+            .findOne()
+            .exec()
+            .then(function(post){
+                updateData.id = post.id;
+                return chai.request(app)
+                    .put(`/posts/${post.id}`)
+                    .send(updateData);
+            })
+            .then(function(res){
+                res.should.have.status(201);
+                return BlogPost.findById(updateData.id).exec();
+            })
+            .then(function(blogpost) {
+                blogpost.title.should.equal(updateData.title);
+                blogpost.content.should.equal(updateData.content);
+            });
+     });
+    }); //ends describe for PUT endpoint
+
+    describe('Delete Endpoint', function(){
+        it('Should delete items on delete', function(){
+            let blogpost;
+            BlogPost
+                .findOne()
+                .exec()
+                .then(function(_blogpost) {
+                    blogpost = _blogpost;
+                    return chai.request(app).delete(`/posts/${blogpost.id}`);
+                })
+                .then(function (res){
+                    res.should.have.status(204);
+                    return BlogPost.findById(blogpost.id).exec();
+                })
+                .then(function(_blogpost){
+                    should.not.exist(_blogpost);
+                });
+        });
     });
+
 
 }); //outer describe
 
