@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: QxXNWaiUx6sRfe06zWIZjOn9LASYeotBu4i/32zC73q77Q/72C+YkAncOl2CsSBDgPA3dSBR9DAtGaOMiFBt8QJbVCVCLZnlqKp7jixmSW3++DL09NoINIn0aiqYHQs8ag0vra3uTLxrvD7X0/nAwSQe3LLrOh56v7tzN5jBYZWK7RFzIFjPs8Ii0mnGWlkaa8vMV6TENWIRDQCeh3046YcE5n4qAFTmUFu/RhD8cQzZt8tFIs2daku7MvEUs+AhpaJB4yGqYlKgvv0j36emKNOPgvaCG8JnNb4GbyLu+NNWW7/OelN4d+oikhw4s92QFCZC1u5cslIIzg/SgPQ50QC5+jWR6BkbSGFzq6sNZGdSbFJwaSoPhSb2U9mdps3SIsxItqaPLGiAI3KwAgJXsdnpNUmyeKGAgXoYAa7gpnHneUrlEcD13nu+LQs/MrtpRM4a36fjqEeSKOxl323sMPSMzjmOU4O4o31Lp+qzWdx7HeBmuuIAk2euPkbSWMzNJKH7//xmflMia/8gm+ZKplGs6X5EJKM8bj4LXEACwL46ivNzhJo6cSPLrBPYn8dPwUv7ILR+UwU38fZCnl7Mzsckjc1/DhpsulABJZPNiVCXCk2s+CX9DGy2Gk5y92ELiNTKV7RAbycBh9XWLQTx1tAaXUyL1XsOUnQTWdbEvNI=
+  app: pacific-dusk-25121
+  on:
+    repo: pszujewski/blog-app-mongoose-challenge-solution
